@@ -340,5 +340,238 @@ VALUES
 ('Ahmad', 'Mohammad', '0700000000',
  'Kandahar', 'ID1001');
  commit;
+INSERT INTO ExchangeRates
+(CurrencyID, BuyRate, SellRate, UserID)
+VALUES
+(2, 64.50, 65.00, 1);
+
+INSERT INTO ExchangeRates
+(CurrencyID, BuyRate, SellRate, UserID)
+VALUES
+(3, 0.23, 0.25, 1);
+
+INSERT INTO ExchangeRates
+(CurrencyID, BuyRate, SellRate, UserID)
+VALUES
+(4, 0.0015, 0.0020, 1);
+
+INSERT INTO ExchangeRates
+(CurrencyID, BuyRate, SellRate, UserID)
+VALUES
+(5, 75.00, 77.00, 1);
+
+COMMIT;
+select * from exchangerates;
+INSERT INTO Transactions
+(
+    CustomerID,
+    CurrencyID,
+    UserID,
+    TransactionType,
+    Amount,
+    Rate,
+    TotalAmount,
+    Description
+)
+VALUES
+(
+    1,
+    2,
+    1,
+    'BUY',
+    1000,
+    64.50,
+    64500,
+    'Customer sold USD to Sarafi'
+);commit;
+INSERT INTO Transactions
+(
+    CustomerID,
+    CurrencyID,
+    UserID,
+    TransactionType,
+    Amount,
+    Rate,
+    TotalAmount,
+    Description
+)
+VALUES
+(
+    1,
+    2,
+    1,
+    'BUY',
+    1000,
+    64.50,
+    64500,
+    'Customer sold USD to Sarafi'
+);commit;
+INSERT INTO Loans
+(
+    CustomerID,
+    CurrencyID,
+    Amount,
+    PaidAmount,
+    RemainingAmount,
+    DueDate,
+    Status
+)
+VALUES
+(
+    1,
+    1,
+    50000,
+    0,
+    50000,
+    SYSDATE + 30,
+    'Unpaid'
+);commit;
+INSERT INTO ReceivablePayable
+(
+    CustomerID,
+    CurrencyID,
+    Type,
+    Amount,
+    PaidAmount,
+    RemainingAmount,
+    DueDate,
+    Status
+)
+VALUES
+(
+    1,
+    1,
+    'PAYABLE',
+    20000,
+    0,
+    20000,
+    SYSDATE + 15,
+    'Unpaid'
+);commit;
+INSERT INTO ReceivablePayable
+(
+    CustomerID,
+    CurrencyID,
+    Type,
+    Amount,
+    PaidAmount,
+    RemainingAmount,
+    DueDate,
+    Status
+)
+VALUES
+(
+    1,
+    1,
+    'PAYABLE',
+    20000,
+    0,
+    20000,
+    SYSDATE + 15,
+    'Unpaid'
+);commit;
+INSERT INTO Income
+(
+    CurrencyID,
+    Type,
+    Amount,
+    Description,
+    UserID
+)
+VALUES
+(
+    1,
+    'Commission',
+    1500,
+    'Commission from currency exchange',
+    1
+);
+INSERT INTO Income
+(
+    CurrencyID,
+    Type,
+    Amount,
+    Description,
+    UserID
+)
+VALUES
+(
+    1,
+    'Exchange Profit',
+    2000,
+    'Profit from currency exchange',
+    1
+);
+
+COMMIT;
+INSERT INTO Expenses
+(
+    CurrencyID,
+    Type,
+    Amount,
+    Description,
+    UserID
+)
+VALUES
+(
+    1,
+    'Electricity',
+    2000,
+    'Monthly electricity expense',
+    1
+);
+commit;
+INSERT INTO Expenses
+(
+    CurrencyID,
+    Type,
+    Amount,
+    Description,
+    UserID
+)
+VALUES
+(
+    1,
+    'Rent',
+    10000,
+    'Monthly shop rent',
+    1
+);
+
+COMMIT;
+INSERT INTO Capital
+(
+    OwnerName,
+    CurrencyID,
+    Amount,
+    Description,
+    UserID
+)
+VALUES
+(
+    'Haji Abdul Rahman',
+    1,
+    500000,
+    'Initial capital of Sarafi',
+    1
+);commit;
+INSERT INTO CashBalance
+(
+    CurrencyID,
+    OpeningBalance,
+    TotalIn,
+    TotalOut,
+    ClosingBalance,
+    UserID
+)
+VALUES
+(
+    1,
+    500000,
+    0,
+    0,
+    500000,
+    1
+);
  
 
