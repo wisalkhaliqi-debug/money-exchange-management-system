@@ -1,0 +1,1317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Exchange System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section id="loginPage" class="login-page">
+
+        <div class="login-brand">
+            <div class="brand-badge">FINANCE • EXCHANGE</div>
+
+            <h1>
+                MONEY<br>
+                <span>EXCHANGE</span><br>
+                SYSTEM
+            </h1>
+
+            <p>
+                Smart Financial Management.
+                Fast, Secure and Reliable Currency Exchange.
+            </p>
+
+            <div class="currency-art">
+                <div class="coin coin-dollar">$</div>
+                <div class="coin coin-euro">€</div>
+                <div class="coin coin-afn">؋</div>
+                <div class="coin coin-pound">£</div>
+            </div>
+
+            <div class="brand-footer">
+                YOUR TRUSTED FINANCIAL PARTNER
+            </div>
+        </div>
+
+        <div class="login-form-area">
+            <div class="login-card">
+                <div class="login-icon">✦</div>
+
+                <h2>Welcome Back!</h2>
+                <p class="login-subtitle">Sign in to your account</p>
+
+                <form id="loginForm">
+
+                    <label for="username">Username</label>
+                    <div class="login-input">
+                        <span>👤</span>
+                        <input type="text" id="username"
+                               placeholder="Enter your username" required>
+                    </div>
+
+                    <label for="password">Password</label>
+                    <div class="login-input">
+                        <span>🔒</span>
+                        <input type="password" id="password"
+                               placeholder="Enter your password" required>
+                    </div>
+
+                    <p id="loginError" class="login-error"></p>
+
+                    <button type="submit" class="login-submit">
+                        SIGN IN →
+                    </button>
+
+                </form>
+
+                <div class="login-bottom">
+                    Secure Login · Money Exchange System
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- MAIN APPLICATION -->
+    <div id="app" class="app hidden">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+                <div class="brand-icon">M</div>
+                <div>
+                    <h2>Money Exchange</h2>
+                    <span>Management System</span>
+                </div>
+            </div>
+
+            <div class="sidebar-menu">
+
+                <p class="menu-title">MAIN MENU</p>
+
+                <button class="nav-link active" data-page="dashboard">
+                    <span>▦</span> Dashboard
+                </button>
+
+                <button class="nav-link" data-page="exchange">
+                    <span>⇄</span> Currency Exchange
+                </button>
+
+                <button class="nav-link" data-page="rates">
+                    <span>◈</span> Exchange Rates
+                </button>
+
+                <button class="nav-link" data-page="transactions">
+                    <span>⇆</span> New Transaction
+                </button>
+
+                <button class="nav-link" data-page="remittance">
+                    <span>➤</span> Money Remittance
+                </button>
+
+                <p class="menu-title">FINANCIAL MANAGEMENT</p>
+
+                <button class="nav-link" data-page="cash">
+                    <span>▣</span> Cash Management
+                </button>
+
+                <button class="nav-link" data-page="debts">
+                    <span>↔</span> Debt Management
+                </button>
+
+                <button class="nav-link" data-page="receivables">
+                    <span>◉</span> Receivables
+                </button>
+
+                <button class="nav-link" data-page="deposits">
+                    <span>▤</span> Deposits
+                </button>
+
+                <button class="nav-link" data-page="advances">
+                    <span>▧</span> Advance Payments
+                </button>
+
+                <p class="menu-title">MANAGEMENT</p>
+
+                <button class="nav-link" data-page="customers">
+                    <span>♙</span> Customers
+                </button>
+
+                <button class="nav-link" data-page="history">
+                    <span>◷</span> Transaction History
+                </button>
+
+                <button class="nav-link" data-page="reports">
+                    <span>▥</span> Reports
+                </button>
+
+                <button class="nav-link" data-page="users">
+                    <span>♧</span> User Management
+                </button>
+
+                <button class="nav-link" data-page="permissions">
+                    <span>⚙</span> Permissions
+                </button>
+
+                <button class="nav-link" data-page="settings">
+                    <span>⚙</span> Settings
+                </button>
+
+                <button class="nav-link" data-page="calculator">
+                    <span>▦</span> Calculator
+                </button>
+
+                <button class="nav-link" data-page="backup">
+                    <span>⇩</span> Backup & Restore
+                </button>
+
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">A</div>
+                    <div class="user-info">
+                        <strong id="currentUser">Admin</strong>
+                        <small>System User</small>
+                    </div>
+                </div>
+
+                <button id="logoutBtn" class="logout-btn">
+                    Logout
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <h2 id="pageTitle">Dashboard</h2>
+                    <p>Welcome to Money Exchange System</p>
+                </div>
+
+                <div class="topbar-right">
+                    <span class="status-indicator">System Online</span>
+                </div>
+            </header>
+
+            <div class="page-container">
+
+                <!-- DASHBOARD -->
+                <section id="dashboard" class="page active">
+
+                    <div class="welcome-section">
+                        <div>
+                            <h2>Welcome Back!</h2>
+                            <p>Here is your business overview.</p>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+
+                        <div class="stat-card">
+                            <div class="stat-icon">▣</div>
+                            <div>
+                                <p>Total Cash Balance</p>
+                                <h2 id="dashboardCash">0</h2>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">↔</div>
+                            <div>
+                                <p>Total Debts</p>
+                                <h2 id="dashboardDebts">0</h2>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">◉</div>
+                            <div>
+                                <p>Receivables</p>
+                                <h2 id="dashboardReceivables">0</h2>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">↗</div>
+                            <div>
+                                <p>Total Profit</p>
+                                <h2 id="dashboardProfit">0</h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>Recent Transactions</h3>
+                            <button class="btn btn-primary" data-page="history">
+                                View All
+                            </button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Customer</th>
+                                        <th>Currency</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentTransactions"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- CURRENCY EXCHANGE -->
+                <section id="exchange" class="page">
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>Currency Exchange Calculator</h3>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>From Currency</label>
+                                <select id="fromCurrency">
+                                    <option value="USD">USD</option>
+                                    <option value="AFN">AFN</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="PKR">PKR</option>
+                                    <option value="INR">INR</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>To Currency</label>
+                                <select id="toCurrency">
+                                    <option value="AFN">AFN</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="PKR">PKR</option>
+                                    <option value="INR">INR</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="number" id="exchangeAmount" placeholder="Enter amount">
+                            </div>
+
+                        </div>
+
+                        <div id="calculationResult" class="result-box">
+                            <p>Exchange Result</p>
+                            <h2 id="resultAmount">0.00</h2>
+                            <span id="resultRate">Exchange Rate: 0</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- EXCHANGE RATES -->
+                <section id="rates" class="page">
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>Exchange Rates</h3>
+                        </div>
+
+                        <form id="rateForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select id="rateCurrency" required>
+                                        <option value="USD">USD</option>
+                                        <option value="AFN">AFN</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="PKR">PKR</option>
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Exchange Rate</label>
+                                    <input type="number" id="rateValue" step="any" required>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Update Rate</button>
+                        </form>
+                    </div>
+
+                </section>
+
+                <!-- NEW TRANSACTION -->
+                <section id="transactions" class="page">
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>New Transaction</h3>
+                        </div>
+
+                        <form id="transactionForm">
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Customer Name</label>
+                                    <input type="text" id="customerName" placeholder="Customer name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="number" id="transactionAmount" placeholder="Enter amount" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select id="transactionCurrency">
+                                        <option value="USD">USD</option>
+                                        <option value="AFN">AFN</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="PKR">PKR</option>
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div id="transactionPreview" class="result-box"></div>
+
+                            <button type="submit" class="btn btn-primary">
+                                Save Transaction
+                            </button>
+
+                        </form>
+                    </div>
+
+                </section>
+
+                <!-- MONEY REMITTANCE -->
+                <section id="remittance" class="page">
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>Money Remittance</h3>
+                        </div>
+
+                        <form id="remittanceForm">
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Sender Name</label>
+                                    <input type="text" id="senderName" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Sender Phone</label>
+                                    <input type="tel" id="senderPhone" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Receiver Name</label>
+                                    <input type="text" id="receiverName" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Receiver Phone</label>
+                                    <input type="tel" id="receiverPhone" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="number" id="remittanceAmount" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select id="remittanceCurrency">
+                                        <option value="USD">USD</option>
+                                        <option value="AFN">AFN</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="PKR">PKR</option>
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Commission</label>
+                                    <input type="number" id="remittanceFee" value="0">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Reference Number</label>
+                                    <input type="text" id="remittanceReference">
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea id="remittanceDescription"></textarea>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                Save Remittance
+                            </button>
+
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Remittance History</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Reference</th>
+                                        <th>Sender</th>
+                                        <th>Receiver</th>
+                                        <th>Amount</th>
+                                        <th>Commission</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="remittanceTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- CASH MANAGEMENT -->
+                <section id="cash" class="page">
+
+                    <div class="panel">
+                        <h3>Cash Management</h3>
+
+                        <form id="cashForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Transaction Type</label>
+                                    <select id="cashType">
+                                        <option value="in">Cash In</option>
+                                        <option value="out">Cash Out</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="number" id="cashAmount" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select id="cashCurrency">
+                                        <option value="USD">USD</option>
+                                        <option value="AFN">AFN</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="PKR">PKR</option>
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input type="text" id="cashDescription">
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Cash Entry</button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Cash Balances</h3>
+                        <div id="cashBalanceTable"></div>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <p>Total Balance</p>
+                                <h3 id="totalCashBalance">0</h3>
+                            </div>
+                            <div class="stat-card">
+                                <p>Total Cash In</p>
+                                <h3 id="totalCashIn">0</h3>
+                            </div>
+                            <div class="stat-card">
+                                <p>Total Cash Out</p>
+                                <h3 id="totalCashOut">0</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Cash History</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <tbody id="cashHistoryTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- DEBTS -->
+                <section id="debts" class="page">
+
+                    <div class="panel">
+                        <h3>Debt Management</h3>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <p>We Owe</p>
+                                <h3 id="weOweTotal">0</h3>
+                            </div>
+                            <div class="stat-card">
+                                <p>They Owe Us</p>
+                                <h3 id="theyOweTotal">0</h3>
+                            </div>
+                        </div>
+
+                        <form id="debtForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Person Name</label>
+                                    <input type="text" id="debtPerson" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" id="debtPhone" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Debt Type</label>
+                                    <select id="debtType">
+                                        <option value="weOwe">We Owe</option>
+                                        <option value="theyOwe">They Owe Us</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="number" id="debtAmount" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select id="debtCurrency">
+                                        <option value="USD">USD</option>
+                                        <option value="AFN">AFN</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="PKR">PKR</option>
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Due Date</label>
+                                    <input type="date" id="debtDueDate">
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea id="debtDescription"></textarea>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Debt</button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Debt Records</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <tbody id="debtsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- RECEIVABLES -->
+                <section id="receivables" class="page">
+
+                    <div class="panel">
+                        <h3>Receivables Management</h3>
+
+                        <form id="receivableForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Person Name</label>
+                                    <input type="text" id="receivablePerson" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" id="receivablePhone" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="number" id="receivableAmount" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select id="receivableCurrency">
+                                        <option value="USD">USD</option>
+                                        <option value="AFN">AFN</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="PKR">PKR</option>
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea id="receivableDescription"></textarea>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Receivable</button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Receivables Records</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <tbody id="receivablesTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- DEPOSITS -->
+                <section id="deposits" class="page">
+
+                    <div class="panel">
+                        <h3>Customer Deposits</h3>
+
+                        <form id="depositForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Customer Name</label>
+                                    <input type="text" id="depositPerson" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" id="depositPhone" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="number" id="depositAmount" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select id="depositCurrency">
+                                        <option value="USD">USD</option>
+                                        <option value="AFN">AFN</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="PKR">PKR</option>
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea id="depositDescription"></textarea>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Deposit</button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Deposit Records</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <tbody id="depositsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- ADVANCE PAYMENTS -->
+                <section id="advances" class="page">
+
+                    <div class="panel">
+                        <h3>Advance Payments</h3>
+
+                        <form id="advanceForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Person Name</label>
+                                    <input type="text" id="advancePerson" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" id="advancePhone" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Payment Type</label>
+                                    <select id="advanceType">
+                                        <option value="given">Advance Given</option>
+                                        <option value="received">Advance Received</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="number" id="advanceAmount" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select id="advanceCurrency">
+                                        <option value="USD">USD</option>
+                                        <option value="AFN">AFN</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="PKR">PKR</option>
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea id="advanceDescription"></textarea>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Advance</button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Advance Records</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <tbody id="advancesTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- CUSTOMERS -->
+                <section id="customers" class="page">
+
+                    <div class="panel">
+                        <h3>Add New Customer</h3>
+
+                        <form id="customerForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Customer Name</label>
+                                    <input type="text" id="newCustomerName" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" id="newCustomerPhone" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" id="newCustomerAddress">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Notes</label>
+                                    <textarea id="newCustomerNotes"></textarea>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Add Customer</button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>Customer List</h3>
+                            <input type="search" id="customerSearch" placeholder="Search customers...">
+                        </div>
+
+                        <div class="table-responsive">
+                            <table>
+                                <tbody id="customersTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- TRANSACTION HISTORY -->
+                <section id="history" class="page">
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>Transaction History</h3>
+                            <input type="search" id="historySearch" placeholder="Search transactions...">
+                        </div>
+
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>Customer</th>
+                                        <th>Currency</th>
+                                        <th>Amount</th>
+                                        <th>Commission</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historyTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- REPORTS -->
+                <section id="reports" class="page">
+
+                    <div class="panel">
+                        <h3>Financial Reports</h3>
+
+                        <form id="reportFilterForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    <input type="date" id="reportStartDate">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>End Date</label>
+                                    <input type="date" id="reportEndDate">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Currency</label>
+                                    <select id="reportCurrency">
+                                        <option value="ALL">All Currencies</option>
+                                        <option value="USD">USD</option>
+                                        <option value="AFN">AFN</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="PKR">PKR</option>
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Generate Report</button>
+                        </form>
+                    </div>
+
+                    <div class="stats-grid">
+
+                        <div class="stat-card">
+                            <p>Total Income</p>
+                            <h3 id="reportIncome">0</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <p>Total Expenses</p>
+                            <h3 id="reportExpenses">0</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <p>Net Profit</p>
+                            <h3 id="reportProfit">0</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <p>Total Commission</p>
+                            <h3 id="reportCommission">0</h3>
+                        </div>
+
+                    </div>
+
+                    <div class="panel">
+                        <h3>Report Details</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <tbody id="reportsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- USER MANAGEMENT -->
+                <section id="users" class="page">
+
+                    <div class="panel">
+                        <h3>Add New User</h3>
+
+                        <form id="userForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" id="newUsername" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" id="newPassword" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select id="newRole">
+                                        <option value="staff">Staff</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Add User</button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3>System Users</h3>
+
+                        <div class="table-responsive">
+                            <table>
+                                <tbody id="usersTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- PERMISSIONS -->
+                <section id="permissions" class="page">
+
+                    <div class="panel">
+                        <h3>User Permissions</h3>
+
+                        <form id="permissionForm">
+
+                            <div class="form-group">
+                                <label>Select User</label>
+                                <select id="permissionUser"></select>
+                            </div>
+
+                            <h4>Access Permissions</h4>
+
+                            <div class="permission-grid">
+                                <label><input type="checkbox" name="permissions" value="dashboard"> Dashboard</label>
+                                <label><input type="checkbox" name="permissions" value="exchange"> Exchange</label>
+                                <label><input type="checkbox" name="permissions" value="rates"> Rates</label>
+                                <label><input type="checkbox" name="permissions" value="transactions"> Transactions</label>
+                                <label><input type="checkbox" name="permissions" value="remittance"> Remittance</label>
+                                <label><input type="checkbox" name="permissions" value="cash"> Cash Management</label>
+                                <label><input type="checkbox" name="permissions" value="debts"> Debts</label>
+                                <label><input type="checkbox" name="permissions" value="receivables"> Receivables</label>
+                                <label><input type="checkbox" name="permissions" value="deposits"> Deposits</label>
+                                <label><input type="checkbox" name="permissions" value="advances"> Advances</label>
+                                <label><input type="checkbox" name="permissions" value="customers"> Customers</label>
+                                <label><input type="checkbox" name="permissions" value="history"> History</label>
+                                <label><input type="checkbox" name="permissions" value="reports"> Reports</label>
+                                <label><input type="checkbox" name="permissions" value="users"> Users</label>
+                                <label><input type="checkbox" name="permissions" value="settings"> Settings</label>
+                                <label><input type="checkbox" name="permissions" value="backup"> Backup</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Permissions</button>
+
+                        </form>
+                    </div>
+
+                </section>
+
+                <!-- SETTINGS -->
+                <section id="settings" class="page">
+
+                    <div class="panel">
+                        <h3>Account Settings</h3>
+
+                        <form id="settingsForm">
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Language</label>
+                                    <select id="languageSelect">
+                                        <option value="en">English</option>
+                                        <option value="ps">Pashto</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" id="settingsUsername">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>New Password</label>
+                                    <input type="password" id="settingsPassword">
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Settings</button>
+
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Add User from Settings</h3>
+
+                        <form id="settingsUserForm">
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" id="settingsNewUsername">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" id="settingsNewPassword">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select id="settingsNewRole">
+                                        <option value="staff">Staff</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Create User</button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Company Information</h3>
+
+                        <form id="companySettingsForm">
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input type="text" id="companyName">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" id="companyPhone" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" id="companyAddress">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Company Logo</label>
+                                    <input type="file" id="companyLogo" accept="image/*">
+                                    <img id="companyLogoPreview" alt="Company Logo" style="max-width:120px;">
+                                </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Company Information</button>
+
+                        </form>
+                    </div>
+
+                </section>
+
+                <!-- CALCULATOR -->
+                <section id="calculator" class="page">
+
+                    <div class="panel calculator-panel">
+                        <h3>Calculator</h3>
+
+                        <div class="calculator">
+                            <input type="text" id="calculatorDisplay" readonly>
+
+                            <div class="calculator-buttons">
+                                <button type="button" data-value="C">C</button>
+                                <button type="button" data-value="DEL">DEL</button>
+                                <button type="button" data-value="%">%</button>
+                                <button type="button" data-value="/">÷</button>
+
+                                <button type="button" data-value="7">7</button>
+                                <button type="button" data-value="8">8</button>
+                                <button type="button" data-value="9">9</button>
+                                <button type="button" data-value="*">×</button>
+
+                                <button type="button" data-value="4">4</button>
+                                <button type="button" data-value="5">5</button>
+                                <button type="button" data-value="6">6</button>
+                                <button type="button" data-value="-">−</button>
+
+                                <button type="button" data-value="1">1</button>
+                                <button type="button" data-value="2">2</button>
+                                <button type="button" data-value="3">3</button>
+                                <button type="button" data-value="+">+</button>
+
+                                <button type="button" data-value="0">0</button>
+                                <button type="button" data-value=".">.</button>
+                                <button type="button" data-value="=" class="equal">=</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- BACKUP & RESTORE -->
+                <section id="backup" class="page">
+
+                    <div class="panel">
+                        <h3>Backup & Restore</h3>
+
+                        <p>Create a backup of your system data.</p>
+
+                        <button type="button" id="backupBtn" class="btn btn-primary">
+                            Download Backup
+                        </button>
+
+                        <p id="backupMessage"></p>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Restore Data</h3>
+
+                        <div class="form-group">
+                            <label>Select Backup File</label>
+                            <input type="file" id="restoreFile" accept=".json">
+                        </div>
+
+                        <button type="button" id="restoreBtn" class="btn btn-primary">
+                            Restore Backup
+                        </button>
+
+                        <p id="restoreMessage"></p>
+                    </div>
+
+                </section>
+
+                <!-- TRANSACTION RECEIPT -->
+                <section id="receipt" class="page">
+
+                    <div class="panel receipt-panel">
+                        <div class="receipt-header">
+                            <h2 id="receiptCompanyName">Money Exchange</h2>
+                            <p>Transaction Receipt</p>
+                        </div>
+
+                        <div class="receipt-details">
+                            <p>Receipt Number: <strong id="receiptId"></strong></p>
+                            <p>Date: <strong id="receiptDate"></strong></p>
+                            <p>Customer: <strong id="receiptCustomer"></strong></p>
+                            <p>Currency: <strong id="receiptCurrency"></strong></p>
+                            <p>Amount: <strong id="receiptAmount"></strong></p>
+                            <p>Commission: <strong id="receiptFee"></strong></p>
+                            <p>Total: <strong id="receiptTotal"></strong></p>
+                        </div>
+
+                        <div class="receipt-footer">
+                            <p>Thank you for your business!</p>
+                        </div>
+
+                        <button type="button" class="btn btn-primary" onclick="window.print()">
+                            Print Receipt
+                        </button>
+                    </div>
+
+                </section>
+
+                <!-- REMITTANCE RECEIPT -->
+                <section id="remittanceReceipt" class="page">
+
+                    <div class="panel receipt-panel">
+                        <div class="receipt-header">
+                            <h2>Money Exchange</h2>
+                            <p>Money Remittance Receipt</p>
+                        </div>
+
+                        <div class="receipt-details">
+                            <p>Reference: <strong id="remittanceReceiptReference"></strong></p>
+                            <p>Date: <strong id="remittanceReceiptDate"></strong></p>
+                            <p>Sender: <strong id="remittanceReceiptSender"></strong></p>
+                            <p>Receiver: <strong id="remittanceReceiptReceiver"></strong></p>
+                            <p>Amount: <strong id="remittanceReceiptAmount"></strong></p>
+                            <p>Commission: <strong id="remittanceReceiptFee"></strong></p>
+                            <p>Receiver Gets: <strong id="remittanceReceiptTotal"></strong></p>
+                        </div>
+
+                        <button type="button" class="btn btn-primary" onclick="window.print()">
+                            Print Receipt
+                        </button>
+                    </div>
+
+                </section>
+
+            </div>
+
+            <footer class="main-footer">
+                <p>Money Exchange System © 2026. All Rights Reserved.</p>
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
