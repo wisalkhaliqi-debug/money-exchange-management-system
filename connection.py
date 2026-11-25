@@ -1,23 +1,11 @@
-import oracledb
+"""Backward-compatible Oracle connection entry point.
 
-def get_connection():
-    try:
-        connection = oracledb.connect(
-            user="YOUR_USERNAME",
-            password="YOUR_PASSWORD",
-            dsn="localhost:1521/orclpdb"
-        )
+Set ORACLE_USER, ORACLE_PASSWORD and ORACLE_DSN in your environment.
+"""
+from database.connection import get_connection
 
-        print("Oracle Database Connected Successfully!")
-        return connection
-
-    except Exception as error:
-        print("Database Connection Error:", error)
-        return None
-
-
-if _name_ == "_main_":
-    conn = get_connection()
-
-    if conn:
-        conn.close()
+if __name__ == "__main__":
+    with get_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1 FROM dual")
+            print("Oracle connection successful:", cursor.fetchone()[0])
