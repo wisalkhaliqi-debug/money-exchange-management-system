@@ -4,7 +4,7 @@
 A smart financial management system for currency exchange businesses.
 
 ## Technologies
-- Python
+- JavaScript 
 - Oracle Database 19c
 - Tkinter
 - GitHub
