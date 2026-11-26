@@ -1,36 +1,46 @@
 # Smart Currency Exchange & Financial Management System
 
-A currency-exchange and financial-management project. The current repository contains a browser-based frontend (HTML, CSS, JavaScript) and an Oracle Database 19c schema/connection starter.
+A currency-exchange and financial-management project with a browser frontend, Flask API, and Oracle Database 19c.
 
 ## Repository structure
 
 - `index.html`, `style.css`, `script.js` — browser frontend.
+- `backend/app.py` — initial Flask API.
 - `database/table.sql` — Oracle table definitions (review before running).
 - `database/triggers.sql` — Oracle triggers.
-- `database/connection.py` — Python Oracle connection helper.
-- `connection.py` — backward-compatible connection test entry point.
+- `database/connection.py` — shared Oracle connection helper.
+- `connection.py` — Oracle connection check entry point.
 
-## Python and Oracle setup
+## Install dependencies
 
-1. Install Python 3.10 or newer.
+1. Use Python 3.10 or newer.
 2. Create and activate a virtual environment.
-3. Install dependencies: `python -m pip install -r requirements.txt`.
-4. Copy `.env.example` to `.env` and enter your own Oracle username, password, and service name.
-5. Confirm Oracle Database 19c is running and that the service name in `ORACLE_DSN` is correct.
-6. Test the connection: `python connection.py`.
+3. Install packages: `python -m pip install -r requirements.txt`.
+4. Configure Oracle credentials using the environment variables documented in `.env.example` (or your existing working local configuration).
 
-Example DSN: `localhost:1521/XEPDB1`. Some installations use a different service name; use the service configured on your own Oracle server.
+## Run the application
 
-## Database setup
+From the repository root:
 
-The SQL files are starter scripts, not a migration system. Inspect them and take a backup before running them against any database containing existing data. Run table creation before triggers. Do not run sample inserts until the schema and foreign-key IDs have been checked against your own database.
+```bash
+python -m backend.app
+```
 
-## Security notes
+Open `http://127.0.0.1:5000` in your browser.
 
-- Never commit `.env`, database passwords, API keys, or real customer information.
-- The frontend currently contains browser-side demo/local-storage behavior; it is not a secure production authentication system.
-- Do not use demo credentials or placeholder password hashes for real accounts.
+Initial API endpoints:
 
-## Current integration status
+- `GET /api/health` — API and Oracle connectivity check.
+- `GET /api/currencies` — list currencies.
+- `GET /api/customers` — list customers.
+- `POST /api/customers` — create a customer using JSON fields: `name`, `father_name`, `phone`, `address`, `id_number`.
 
-The Python connection helper is configured, but a live Oracle connection has not yet been verified from this GitHub environment. The next integration step is to compare the frontend data model with the Oracle schema, then add a backend API and test it against the actual Oracle 19c instance.
+The API expects the Oracle tables in `database/table.sql` to exist. It reuses `database.connection.get_connection()`; it does not require a second database connection implementation.
+
+## Database safety
+
+The SQL files are starter scripts, not a migration system. Review them and back up existing data before running scripts. Never commit `.env`, database passwords, API keys, or real customer information. The frontend's existing localStorage/demo login is not production-secure.
+
+## Integration status
+
+The initial Flask API scaffold and read/list/create endpoints have been added. They have **not** been tested against the user's local Oracle 19c instance or browser environment. The next step is to verify the API locally, then connect the frontend Customers and Currencies screens to these endpoints.
