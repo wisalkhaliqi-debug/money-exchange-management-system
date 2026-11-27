@@ -111,6 +111,81 @@ def create_customer():
         connection.close()
 
 
+@app.put("/api/customers/<int:customer_id>")
+def update_customer(customer_id):
+    """Update a customer's editable details."""
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return jsonify({"error": "A JSON object is required."}), 400
+
+    allowed = {
+        "name": "Name",
+        "father_name": "FatherName",
+        "phone": "Phone",
+        "address": "Address",
+        "id_number": "IDNumber",
+    }
+    updates = {
+        column: data[key].strip() if isinstance(data.get(key), str) else data.get(key)
+        for key, column in allowed.items()
+        if key in data
+    }
+    if not updates:
+        return jsonify({"error": "No customer fields were provided."}), 400
+    if "Name" in updates and not updates["Name"]:
+        return jsonify({"error": "Customer name cannot be empty."}), 400
+
+    set_clause = ", ".join(f"{column} = :{column}" for column in updates)
+    params = dict(updates)
+    params["customer_id"] = customer_id
+
+    connection = get_connection()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                f"UPDATE Customers SET {set_clause} "
+                "WHERE CustomerID = :customer_id AND Status = 'Active'",
+                params,
+            )
+            if cursor.rowcount == 0:
+                connection.rollback()
+                return jsonify({"error": "Active customer not found."}), 404
+        connection.commit()
+        return jsonify({"message": "Customer updated.", "customer_id": customer_id})
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
+        connection.close()
+
+
+@app.delete("/api/customers/<int:customer_id>")
+def deactivate_customer(customer_id):
+    """Soft-delete a customer so transaction history and foreign keys remain safe."""
+    connection = get_connection()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """UPDATE Customers
+                   SET Status = 'Inactive'
+                   WHERE CustomerID = :customer_id AND Status = 'Active'""",
+                {"customer_id": customer_id},
+            )
+            if cursor.rowcount == 0:
+                connection.rollback()
+                return jsonify({"error": "Active customer not found."}), 404
+        connection.commit()
+        return jsonify({
+            "message": "Customer deactivated.",
+            "customer_id": customer_id,
+        })
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
+        connection.close()
+
+
 @app.errorhandler(oracledb.Error)
 def handle_oracle_error(error):
     app.logger.exception("Oracle database error")
