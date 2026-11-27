@@ -844,31 +844,75 @@ function renderAdvances() {
 
 /* 17. CUSTOMER MANAGEMENT */
 
+async function loadCustomersFromApi() {
+    try {
+        const response = await fetch("/api/customers");
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            throw new Error(result.error || "Could not load customers.");
+        }
+
+        // Notes are currently a frontend-only field; preserve them locally by database ID.
+        const savedNotes = new Map(
+            customers.map(customer => [String(customer.id), customer.notes || ""])
+        );
+        customers = result
+            .filter(row => String(row.status || "Active").toLowerCase() === "active")
+            .map(row => ({
+                id: String(row.customerid),
+                name: row.name || "",
+                phone: row.phone || "",
+                address: row.address || "",
+                notes: savedNotes.get(String(row.customerid)) || ""
+            }));
+        saveData("customers", customers);
+        renderCustomers();
+    } catch (error) {
+        console.error("Customer API load failed:", error);
+        showMessage("د پېرودونکو معلومات له ډیټابېس څخه نه شول لوستلای. ډاډ ترلاسه کړئ چې Flask سرور او Oracle فعال دي.\n\n" + error.message);
+    }
+}
+
 if ($("customerForm")) {
-    $("customerForm").addEventListener("submit", function (event) {
+    $("customerForm").addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const name = $("newCustomerName").value.trim();
-
         if (!name) {
             showMessage("Enter customer name.");
             return;
         }
 
-        customers.unshift({
-            id: createId("CUS"),
+        const customerData = {
             name,
-            phone: $("newCustomerPhone").value,
-            address: $("newCustomerAddress").value,
-            notes: $("newCustomerNotes").value,
-            date: new Date().toISOString()
-        });
+            phone: $("newCustomerPhone").value.trim(),
+            address: $("newCustomerAddress").value.trim()
+        };
 
-        saveData("customers", customers);
-        $("customerForm").reset();
+        try {
+            const response = await fetch("/api/customers", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(customerData)
+            });
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) {
+                throw new Error(result.error || "Could not save customer.");
+            }
 
-        showMessage("Customer added successfully.");
-        renderCustomers();
+            customers.unshift({
+                id: String(result.customer_id),
+                ...customerData,
+                notes: $("newCustomerNotes").value.trim()
+            });
+            saveData("customers", customers);
+            $("customerForm").reset();
+            showMessage("Customer saved to the database successfully.");
+            renderCustomers();
+        } catch (error) {
+            console.error("Customer API save failed:", error);
+            showMessage("پېرودونکی ډیټابېس ته ثبت نه شو. د Flask سرور او Oracle اتصال وګورئ.\n\n" + error.message);
+        }
     });
 }
 
@@ -876,7 +920,6 @@ function renderCustomers() {
     if (!$("customersTable")) return;
 
     const search = ($("customerSearch")?.value || "").toLowerCase();
-
     const filtered = customers.filter(c =>
         String(c.name).toLowerCase().includes(search) ||
         String(c.phone).toLowerCase().includes(search)
@@ -901,6 +944,9 @@ function renderCustomers() {
 }
 
 $("customerSearch")?.addEventListener("input", renderCustomers);
+
+/* Load authoritative customer records from Oracle through the Flask API. */
+loadCustomersFromApi();
 
 /* 18. USER MANAGEMENT */
 
