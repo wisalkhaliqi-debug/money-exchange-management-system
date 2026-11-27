@@ -34,6 +34,10 @@ Initial API endpoints:
 - `GET /api/currencies` — list currencies.
 - `GET /api/customers` — list customers.
 - `POST /api/customers` — create a customer using JSON fields: `name`, `father_name`, `phone`, `address`, `id_number`.
+- `PUT /api/customers/<customer_id>` — update one or more supplied customer fields.
+- `DELETE /api/customers/<customer_id>` — deactivate a customer (`Status = 'Inactive'`) without physically deleting historical records.
+
+Customer update/delete endpoints only operate on active customers. A missing or inactive customer returns HTTP 404. The API validates that a customer name is present and cannot be changed to an empty value.
 
 The API expects the Oracle tables in `database/table.sql` to exist. It reuses `database.connection.get_connection()`; it does not require a second database connection implementation.
 
