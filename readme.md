@@ -47,4 +47,10 @@ The SQL files are starter scripts, not a migration system. Review them and back 
 
 ## Integration status
 
-The initial Flask API scaffold and read/list/create endpoints have been added. They have **not** been tested against the user's local Oracle 19c instance or browser environment. The next step is to verify the API locally, then connect the frontend Customers and Currencies screens to these endpoints.
+- The Customers screen now loads active customers from `GET /api/customers` after a successful login.
+- The Add Customer form sends new records to `POST /api/customers`.
+- Customer update and deactivate API endpoints are available, but edit/deactivate controls are not yet connected in the frontend.
+- The Currencies screen is not yet connected to the API.
+- Customer `Notes` remain in this browser's local storage because the current Oracle `Customers` table has no Notes column.
+
+The browser/API integration and Oracle connection have **not** yet been tested on the user's computer against Oracle 19c. The next step is to install the dependencies from the repository root, configure the local `.env`, and run the Flask health check before testing customer creation.
