@@ -3,6 +3,24 @@
 This checklist verifies the Oracle connection on the developer's own computer.
 It does not claim that the connection has already been tested.
 
+## Windows CMD: confirm the project root
+
+If CMD says that `requirements.txt` cannot be found, first move to the Git repository root. Run this from anywhere inside the repository:
+
+```cmd
+for /f "delims=" %i in ('git rev-parse --show-toplevel') do cd /d "%i"
+dir requirements.txt
+```
+
+The `dir` command should list `requirements.txt`. Then activate the environment (if it is not already active) and install the dependencies:
+
+```cmd
+.venv\Scripts\activate.bat
+python -m pip install -r requirements.txt
+```
+
+If `git rev-parse` says this is not a Git repository, open CMD in the folder that contains the project's `.git` directory. Do not create a second virtual environment in a nested folder.
+
 ## 1. Prepare the local environment
 
 From the project root, install the dependencies:
