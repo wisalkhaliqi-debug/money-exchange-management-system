@@ -16,7 +16,7 @@ def get_connection():
         return None
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     conn = get_connection()
 
     if conn:
