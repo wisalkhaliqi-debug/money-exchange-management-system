@@ -126,6 +126,7 @@ function showApplication() {
 
     showPage("dashboard");
     refreshAll();
+    loadCustomersFromApi();
 }
 
 /* FIXED LOGIN: IDs MATCH YOUR HTML */
@@ -945,8 +946,6 @@ function renderCustomers() {
 
 $("customerSearch")?.addEventListener("input", renderCustomers);
 
-/* Load authoritative customer records from Oracle through the Flask API. */
-loadCustomersFromApi();
 
 /* 18. USER MANAGEMENT */
 
